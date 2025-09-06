@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:size_on_folder/models.dart';
+import "package:flutter/material.dart";
+import "package:size_on_folder/models.dart";
 
 class ViewAsList extends StatelessWidget {
-  final List<FSE> data;
-  final void Function(String path) nav;
-  final ScrollController controller;
   const ViewAsList({
-    super.key,
     required this.controller,
     required this.data,
     required this.nav,
+    super.key,
   });
+  final List<FSE> data;
+  final void Function(String path) nav;
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +20,10 @@ class ViewAsList extends StatelessWidget {
       itemBuilder: (context, i) {
         final e = data[i];
         return Padding(
-          padding: EdgeInsets.all(5),
+          padding: const EdgeInsets.all(5),
           child: Tooltip(
-            textStyle: TextStyle(color: Colors.white),
-            decoration: BoxDecoration(color: Colors.transparent),
+            textStyle: const TextStyle(color: Colors.white),
+            decoration: const BoxDecoration(color: Colors.transparent),
             message: e.name,
             child: ListTile(
               leading: Icon(e.icon),

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:size_on_folder/models.dart';
-import 'package:size_on_folder/view_as_grid.dart';
-import 'package:size_on_folder/view_as_list.dart';
+import "package:flutter/material.dart";
+import "package:size_on_folder/models.dart";
+import "package:size_on_folder/view_as_grid.dart";
+import "package:size_on_folder/view_as_list.dart";
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late String _path;
   late Stream<List<FSE>> _stream;
-  bool _view = false;
+  var _view = false;
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -35,27 +35,29 @@ class _HomeState extends State<Home> {
             ? null
             : IconButton(
                 onPressed: () {
-                  if (_path == "/") return;
-                  var t = _path.substring(0, _path.length - 1);
-                  _init(t.substring(0, t.lastIndexOf('/') + 1));
+                  if (_path == "/") {
+                    return;
+                  }
+                  final t = _path.substring(0, _path.length - 1);
+                  _init(t.substring(0, t.lastIndexOf("/") + 1));
                 },
-                icon: Icon(Icons.arrow_back_rounded),
+                icon: const Icon(Icons.arrow_back_rounded),
               ),
       ),
       body: StreamBuilder(
         stream: _stream,
         builder: (context, a) => AnimatedSwitcher(
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           child: switch (a.connectionState) {
             ConnectionState.none => Center(child: Text(a.error.toString())),
-            ConnectionState.waiting => Center(
+            ConnectionState.waiting => const Center(
               child: CircularProgressIndicator.adaptive(),
             ),
             _ =>
               a.data == null
-                  ? Center(child: Text("Something went wrong"))
+                  ? const Center(child: Text("Something went wrong"))
                   : a.data!.isEmpty
-                  ? Center(child: Text("Empty"))
+                  ? const Center(child: Text("Empty"))
                   : Scrollbar(
                       controller: _controller,
                       child: _view

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:size_on_folder/home.dart';
+import "package:flutter/material.dart";
+import "package:size_on_folder/home.dart";
 
 void main() {
   runApp(const MyApp());
