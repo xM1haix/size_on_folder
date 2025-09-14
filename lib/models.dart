@@ -2,10 +2,11 @@ import "dart:io";
 
 import "package:flutter/material.dart";
 
+///[Stream] which returns [List] of [FSE] from [path]
 Stream<List<FSE>> listEntities(String path) async* {
   try {
     final dir = Directory(path);
-    if (!await dir.exists()) {
+    if (!dir.existsSync()) {
       throw Exception("Dir does not exist: $path");
     }
     final entities = dir.listSync();
@@ -36,27 +37,40 @@ Stream<List<FSE>> listEntities(String path) async* {
   }
 }
 
+///[FSE] only for [Directory]
 class DirEntry extends FSE {
-  DirEntry({required super.name}) : super(icon: Icons.folder);
+  ///
+  DirEntry({required super.name, super.icon = Icons.folder});
 }
 
+///[FSE] only for [Directory]
+
 class FileEntry extends FSE {
-  FileEntry({required super.name, required int size})
-    : _size = size,
-      super(icon: Icons.file_copy_outlined);
+  ///
+  FileEntry({
+    required super.name,
+    required int size,
+    super.icon = Icons.file_copy_outlined,
+  }) : _size = size;
 
   final int _size;
 
+  ///The [size] of the file in bytes
   int get size => _size;
 }
 
+///Base object for [File] and [Directory]
 abstract class FSE {
+  ///
   FSE({required String name, required IconData icon})
     : _name = name,
       _icon = icon;
   final IconData _icon;
   final String _name;
+
+  ///Returns the [IconData]
   IconData get icon => _icon;
 
+  ///Returns the [String] representing the [name]
   String get name => _name;
 }

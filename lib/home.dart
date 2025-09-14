@@ -3,7 +3,9 @@ import "package:size_on_folder/models.dart";
 import "package:size_on_folder/view_as_grid.dart";
 import "package:size_on_folder/view_as_list.dart";
 
+///Home page
 class Home extends StatefulWidget {
+  ///
   const Home({super.key});
 
   @override

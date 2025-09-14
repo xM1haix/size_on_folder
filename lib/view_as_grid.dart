@@ -1,15 +1,23 @@
 import "package:flutter/material.dart";
 import "package:size_on_folder/models.dart";
 
+///View the [data] as [GridView]
 class ViewAsGrid extends StatelessWidget {
+  ///Construction of the [ViewAsGrid]
   const ViewAsGrid({
     required this.controller,
     required this.data,
     required this.nav,
     super.key,
   });
+
+  ///the [List] of [FSE] representing the data in the [GridView]
   final List<FSE> data;
+
+  ///The [ScrollController] of the [GridView]
   final ScrollController controller;
+
+  ///The [Function] to navigate to the new [path]
   final void Function(String path) nav;
 
   @override
